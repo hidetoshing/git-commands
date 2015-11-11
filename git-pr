@@ -1,0 +1,23 @@
+#!/bin/sh
+
+function usage {
+	cat << EOF
+
+現在のブランチをPull Requestします
+
+Usage:
+    $(basename ${0}) [remote (branch)]
+
+Require:
+    hub command
+
+EOF
+}
+
+REMOTE=${1:-"master"}
+BRANCH_NAME=`git rev-parse --abbrev-ref HEAD`
+
+git push -u origin $BRANCH_NAME
+hub pull-request -b $REMOTE
+
+

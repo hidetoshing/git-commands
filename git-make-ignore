@@ -1,0 +1,18 @@
+#!/bin/sh
+
+function usage {
+	cat << EOF
+
+.gitignoreを設置します
+
+Usage:
+	$(basename ${0}) [type]
+
+Type:
+EOF
+	curl http://www.gitignore.io/api/list
+}
+
+TYPE={$1:-"osx"}
+
+curl http://www.gitignore.io/api/${TYPE}

@@ -1,0 +1,30 @@
+#!/bin/sh
+
+function usage {
+	cat << EOF
+
+masterと差分のあるファイルを一覧します
+
+Usage:
+	$(basename ${0}) [branch]
+
+EOF
+}
+
+# options loop
+if [ $# -lt 0 ]; then
+    usage
+    exit 0
+fi
+
+cd `pwd`/`git rev-parse --show-cdup`
+
+BRANCH=${1:-`git rev-parse --abbrev-ref HEAD`}
+FILES=`git diff --name-only master...${BRANCH}`
+
+echo ""
+echo "##### filelist for `pwd`. diff [master:${BRANCH}]"
+for FILE in $FILES; do
+    echo "$FILE"
+done
+echo ""

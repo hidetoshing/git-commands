@@ -1,0 +1,18 @@
+#!/bin/sh
+
+function usage {
+	cat << EOF
+
+現在のブランチをremoteの最新に更新します
+
+Usage:
+	$(basename ${0}) [remote]
+
+EOF
+}
+
+REMOTE=${1:-"origin"}
+BRANCH_NAME=`git rev-parse --abbrev-ref HEAD`
+
+git pull --rebase $REMOTE $BRANCH_NAME
+git status
