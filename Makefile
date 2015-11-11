@@ -1,10 +1,11 @@
 
-TARGET_DIR := $(HOME)/local/bin
+DEST         := $(HOME)/local/bin
+TARGET_FILES := $(wildcard git-*)
 
 help:
 	cat Makefile
 
 install:
-	@echo "mkdir -p $(TARGET_DIR)"; mkdir -p $(TARGET_DIR);
-	@$(foreach val, $(wildcard git-*), ln -sfnv $(abspath $(val)) $(TARGET_DIR)/$(val);)
+	@echo "mkdir -p $(DEST)"; mkdir -p $(DEST);
+	@$(foreach val, $(TARGET_FILES), ln -sfnv $(abspath $(val)) $(DEST)/$(val);)
 
