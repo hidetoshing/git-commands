@@ -1,5 +1,5 @@
 
-DEST         := $(HOME)/local/bin
+DEST         := $(HOME)/bin
 TARGET_FILES := $(wildcard git-*)
 
 help:
