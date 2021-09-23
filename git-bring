@@ -9,16 +9,13 @@ require:
     peco
 
 Usage:
-	$(basename ${0}) <branch> [remote]
+	$(basename ${0}) pr-number 
 
 EOF
 }
 
 cd `pwd`/`git rev-parse --show-cdup`
 
-BRANCH=${1:-`git branch -r| peco --prompt "GIT BRANCH>" | head -n 1 | sed -e "s/^\*\s*//g"`}
-REMOTE=${2:-"origin"}
+NUMBER=${1:-`gh pr list | fzf | head -n 1 | cut -f1`}
 
-git fetch
-git checkout -b ${BRANCH} ${REMOTE}/${BRANCH}
-
+gh pr checkout ${NUMBER}

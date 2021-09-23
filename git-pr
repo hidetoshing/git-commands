@@ -14,10 +14,4 @@ Require:
 EOF
 }
 
-REMOTE=${1:-"master"}
-BRANCH_NAME=`git rev-parse --abbrev-ref HEAD`
-
-git push -u origin $BRANCH_NAME
-hub pull-request -b $REMOTE
-
-
+gh pr create
